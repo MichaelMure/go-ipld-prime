@@ -6,7 +6,7 @@ import (
 	"github.com/ipld/go-ipld-prime/schema"
 )
 
-func NewGeneratorForKindInt(t schema.Type) typedNodeGenerator {
+func NewGeneratorForKindInt(t schema.Type) TypedNodeGenerator {
 	return generateKindInt{
 		t.(schema.TypeInt),
 		generateKindedRejections_Int{

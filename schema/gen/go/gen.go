@@ -13,7 +13,7 @@ import (
 //    and hopefully that interface is nodebuilder,
 //     because I dunno why it wouldn't be unless we goof on perf somehow).
 
-// typedNodeGenerator declares a standard names for a bunch of methods for generating
+// TypedNodeGenerator declares a standard names for a bunch of methods for generating
 // code for our schema types.  There's still numerous places where other casts
 // to more specific interfaces will be required (so, technically, it's not a
 // very powerful interface; it's not so much that the abstractions leak as that
@@ -27,7 +27,7 @@ import (
 //
 // None of these methods return error values because we panic in this package.
 //
-type typedNodeGenerator interface {
+type TypedNodeGenerator interface {
 	// wip note: hopefully imports are a constant.  if not, we'll have to curry something with the writer.
 
 	// -- the typed.Node.Type method and vars -->

@@ -6,7 +6,7 @@ import (
 	"github.com/ipld/go-ipld-prime/schema"
 )
 
-func NewGeneratorForKindLink(t schema.Type) typedNodeGenerator {
+func NewGeneratorForKindLink(t schema.Type) TypedNodeGenerator {
 	return generateKindLink{
 		t.(schema.TypeLink),
 		generateKindedRejections_Link{

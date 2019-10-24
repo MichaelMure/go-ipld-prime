@@ -6,7 +6,7 @@ import (
 	"github.com/ipld/go-ipld-prime/schema"
 )
 
-func NewGeneratorForKindBytes(t schema.Type) typedNodeGenerator {
+func NewGeneratorForKindBytes(t schema.Type) TypedNodeGenerator {
 	return generateKindBytes{
 		t.(schema.TypeBytes),
 		generateKindedRejections_Bytes{
