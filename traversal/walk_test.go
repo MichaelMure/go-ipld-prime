@@ -2,6 +2,7 @@ package traversal_test
 
 import (
 	"bytes"
+	"context"
 	"io"
 	"testing"
 
@@ -121,7 +122,7 @@ func TestWalkMatching(t *testing.T) {
 		var order int
 		err = traversal.Progress{
 			Cfg: &traversal.Config{
-				LinkLoader: func(lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
+				LinkLoader: func(_ context.Context, lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
 					return bytes.NewBuffer(storage[lnk]), nil
 				},
 				LinkTargetNodePrototypeChooser: func(_ ipld.Link, _ ipld.LinkContext) (ipld.NodePrototype, error) {
@@ -167,7 +168,7 @@ func TestWalkMatching(t *testing.T) {
 		var order int
 		err = traversal.Progress{
 			Cfg: &traversal.Config{
-				LinkLoader: func(lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
+				LinkLoader: func(_ context.Context, lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
 					return bytes.NewBuffer(storage[lnk]), nil
 				},
 				LinkTargetNodePrototypeChooser: func(_ ipld.Link, _ ipld.LinkContext) (ipld.NodePrototype, error) {
@@ -212,7 +213,7 @@ func TestWalkMatching(t *testing.T) {
 		var order int
 		err = traversal.Progress{
 			Cfg: &traversal.Config{
-				LinkLoader: func(lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
+				LinkLoader: func(_ context.Context, lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
 					return bytes.NewBuffer(storage[lnk]), nil
 				},
 				LinkTargetNodePrototypeChooser: func(_ ipld.Link, _ ipld.LinkContext) (ipld.NodePrototype, error) {

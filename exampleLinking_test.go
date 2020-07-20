@@ -52,7 +52,7 @@ func ExampleCreatingLink() {
 		context.Background(),
 		ipld.LinkContext{},
 		n,
-		func(ipld.LinkContext) (io.Writer, ipld.StoreCommitter, error) {
+		func(context.Context, ipld.LinkContext) (io.Writer, ipld.StoreCommitter, error) {
 			buf := bytes.Buffer{}
 			return &buf, func(lnk ipld.Link) error {
 				storage[lnk] = buf.Bytes()
@@ -81,7 +81,7 @@ func ExampleLoadingLink() {
 	// First, we'll need a Loader.  This function has to take a link as a parameter,
 	//  then decides where to get the referenced raw data from,
 	//   and returns that as a standard `io.Reader`.
-	var loader ipld.Loader = func(lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
+	var loader ipld.Loader = func(_ context.Context, lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
 		return bytes.NewBuffer(storage[lnk]), nil
 	}
 

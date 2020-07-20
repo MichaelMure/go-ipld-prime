@@ -89,7 +89,7 @@ type LinkBuilder interface {
 // "extra" knowledge of the concrete Link type.  This necessary since there is
 // no mandated standard for how to serially represent Link itself, and such
 // a representation is typically needed by a Storer implementation.
-type Loader func(lnk Link, lnkCtx LinkContext) (io.Reader, error)
+type Loader func(ctx context.Context, lnk Link, lnkCtx LinkContext) (io.Reader, error)
 
 // Storer functions are used to a get a writer for raw serialized content,
 // which will be committed to storage indexed by Link.
@@ -112,7 +112,7 @@ type Loader func(lnk Link, lnkCtx LinkContext) (io.Reader, error)
 // "extra" knowledge of the concrete Link type.  This necessary since there is
 // no mandated standard for how to serially represent Link itself, and such
 // a representation is typically needed by a Storer implementation.
-type Storer func(lnkCtx LinkContext) (io.Writer, StoreCommitter, error)
+type Storer func(ctx context.Context, lnkCtx LinkContext) (io.Writer, StoreCommitter, error)
 
 // StoreCommitter is a thunk returned by a Storer which is used to "commit"
 // the storage operation.  It should be called after the associated writer

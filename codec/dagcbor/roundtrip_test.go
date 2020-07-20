@@ -78,7 +78,7 @@ func TestRoundtripLinksAndBytes(t *testing.T) {
 	}}
 	buf := bytes.Buffer{}
 	lnk, err := lb.Build(context.Background(), ipld.LinkContext{}, n,
-		func(ipld.LinkContext) (io.Writer, ipld.StoreCommitter, error) {
+		func(context.Context, ipld.LinkContext) (io.Writer, ipld.StoreCommitter, error) {
 			return &buf, func(lnk ipld.Link) error { return nil }, nil
 		},
 	)

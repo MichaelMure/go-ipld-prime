@@ -20,7 +20,7 @@ func (tc *Config) init() {
 		tc.Ctx = context.Background()
 	}
 	if tc.LinkLoader == nil {
-		tc.LinkLoader = func(ipld.Link, ipld.LinkContext) (io.Reader, error) {
+		tc.LinkLoader = func(context.Context, ipld.Link, ipld.LinkContext) (io.Reader, error) {
 			return nil, fmt.Errorf("no link loader configured")
 		}
 	}
@@ -33,7 +33,7 @@ func (tc *Config) init() {
 		}
 	}
 	if tc.LinkStorer == nil {
-		tc.LinkStorer = func(ipld.LinkContext) (io.Writer, ipld.StoreCommitter, error) {
+		tc.LinkStorer = func(context.Context, ipld.LinkContext) (io.Writer, ipld.StoreCommitter, error) {
 			return nil, nil, fmt.Errorf("no link storer configured")
 		}
 	}

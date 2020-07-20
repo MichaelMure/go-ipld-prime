@@ -24,7 +24,7 @@ func TestRoundtripCidlink(t *testing.T) {
 
 	buf := bytes.Buffer{}
 	lnk, err := lb.Build(context.Background(), ipld.LinkContext{}, n,
-		func(ipld.LinkContext) (io.Writer, ipld.StoreCommitter, error) {
+		func(context.Context, ipld.LinkContext) (io.Writer, ipld.StoreCommitter, error) {
 			return &buf, func(lnk ipld.Link) error { return nil }, nil
 		},
 	)
@@ -32,7 +32,7 @@ func TestRoundtripCidlink(t *testing.T) {
 
 	nb := basicnode.Prototype__Any{}.NewBuilder()
 	err = lnk.Load(context.Background(), ipld.LinkContext{}, nb,
-		func(lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
+		func(ctx context.Context, lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
 			return bytes.NewBuffer(buf.Bytes()), nil
 		},
 	)

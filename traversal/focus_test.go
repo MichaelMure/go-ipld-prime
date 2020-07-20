@@ -61,7 +61,7 @@ func encode(n ipld.Node) (ipld.Node, ipld.Link) {
 		MhLength: 4,
 	}}
 	lnk, err := lb.Build(context.Background(), ipld.LinkContext{}, n,
-		func(ipld.LinkContext) (io.Writer, ipld.StoreCommitter, error) {
+		func(context.Context, ipld.LinkContext) (io.Writer, ipld.StoreCommitter, error) {
 			buf := bytes.Buffer{}
 			return &buf, func(lnk ipld.Link) error {
 				storage[lnk] = buf.Bytes()
@@ -143,7 +143,7 @@ func TestFocusWithLinkLoading(t *testing.T) {
 	t.Run("link traversal with loader should work", func(t *testing.T) {
 		err := traversal.Progress{
 			Cfg: &traversal.Config{
-				LinkLoader: func(lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
+				LinkLoader: func(_ context.Context, lnk ipld.Link, _ ipld.LinkContext) (io.Reader, error) {
 					return bytes.NewBuffer(storage[lnk]), nil
 				},
 				LinkTargetNodePrototypeChooser: func(_ ipld.Link, _ ipld.LinkContext) (ipld.NodePrototype, error) {

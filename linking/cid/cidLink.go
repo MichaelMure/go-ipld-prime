@@ -21,7 +21,7 @@ type Link struct {
 
 func (lnk Link) Load(ctx context.Context, lnkCtx ipld.LinkContext, na ipld.NodeAssembler, loader ipld.Loader) error {
 	// Open the byte reader.
-	r, err := loader(lnk, lnkCtx)
+	r, err := loader(ctx, lnk, lnkCtx)
 	if err != nil {
 		return err
 	}
@@ -68,7 +68,7 @@ type LinkBuilder struct {
 
 func (lb LinkBuilder) Build(ctx context.Context, lnkCtx ipld.LinkContext, node ipld.Node, storer ipld.Storer) (ipld.Link, error) {
 	// Open the byte writer.
-	w, commit, err := storer(lnkCtx)
+	w, commit, err := storer(ctx, lnkCtx)
 	if err != nil {
 		return nil, err
 	}
